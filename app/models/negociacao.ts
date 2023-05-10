@@ -29,4 +29,16 @@ export class Negociacao {
   get volume(): number {
     return this._quantidade * this._valor;
   }
+
+  public static criaDe(
+    dataString: string,
+    quantidadeString: string,
+    valorString: string
+  ): Negociacao {
+    const exp = /-/g;
+    const date = new Date(dataString.replace(exp, ","));
+    const quantidade = Number(quantidadeString);
+    const valor = Number(valorString);
+    return new Negociacao(date, quantidade, valor);
+  }
 }
