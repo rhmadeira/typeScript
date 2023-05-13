@@ -1,4 +1,4 @@
-export function logarTempoExecucao(emSegundos = false) {
+export function logarTempoDeExecucao(emSegundos = false) {
     return function (target, propertyKey, descriptor) {
         const metodoOriginal = descriptor.value;
         descriptor.value = function (...args) {
@@ -11,8 +11,8 @@ export function logarTempoExecucao(emSegundos = false) {
             const t1 = performance.now();
             const retorno = metodoOriginal.apply(this, args);
             const t2 = performance.now();
-            console.log(`O tempo de execução do método ${propertyKey} é de ${(t2 - t1) / divisor} ${unidade}`);
-            return retorno;
+            console.log(`${propertyKey}, tempo de execução: ${(t2 - t1) / divisor} ${unidade}`);
+            retorno;
         };
         return descriptor;
     };
